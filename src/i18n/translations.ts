@@ -176,6 +176,9 @@ export const translations: TranslationMap = {
   },
 
   // Footer
+  "footer.ctaTitle": { de: "Bereit, Ihre Abläufe zu transformieren?", en: "Ready to Transform Your Operations?" },
+  "footer.ctaSub": { de: "Vereinbaren Sie noch heute eine Demo und entdecken Sie das Potenzial unserer KI-Lösungen.", en: "Schedule a demo today and discover the potential of our AI solutions." },
+  "footer.ctaButton": { de: "Demo vereinbaren", en: "Schedule Demo" },
   "footer.desc": {
     de: "KI-Gesundheitslösungen aus Berlin. Wir transformieren Krankenhäuser, Kliniken und Personalagenturen weltweit mit bewährten KI-Plattformen.",
     en: "Berlin-based AI Healthcare Solutions. Transforming hospitals, clinics, and staffing agencies worldwide with proven AI platforms.",
