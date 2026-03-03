@@ -99,7 +99,11 @@ const Navbar = () => {
             </button>
           </div>
 
-          <Button size="sm" className="gradient-teal border-0 text-primary-foreground font-semibold ml-2 group">
+          <Button 
+            size="sm" 
+            className="gradient-teal border-0 text-primary-foreground font-semibold ml-2 group"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             {t("nav.getStarted")}
             <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
           </Button>
@@ -147,7 +151,14 @@ const Navbar = () => {
               EN
             </button>
           </div>
-          <Button size="sm" className="gradient-teal border-0 text-primary-foreground font-semibold w-full">
+          <Button 
+            size="sm" 
+            className="gradient-teal border-0 text-primary-foreground font-semibold w-full"
+            onClick={() => {
+              setMobileOpen(false);
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
             {t("nav.getStarted")}
           </Button>
         </div>

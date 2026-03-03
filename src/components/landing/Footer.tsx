@@ -32,7 +32,11 @@ const Footer = () => {
             <p className="text-white/60 mb-8 max-w-xl mx-auto">
               {t("footer.ctaSub")}
             </p>
-            <Button size="lg" className="gradient-teal border-0 text-primary-foreground font-semibold px-8">
+            <Button 
+              size="lg" 
+              className="gradient-teal border-0 text-primary-foreground font-semibold px-8"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               {t("footer.ctaButton")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>

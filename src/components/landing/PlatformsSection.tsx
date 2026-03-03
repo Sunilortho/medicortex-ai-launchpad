@@ -92,6 +92,7 @@ const PlatformsSection = () => {
                 <Button
                   variant="outline"
                   className="w-full border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground transition-colors group/btn"
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {t("platforms.demo")}
                   <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />

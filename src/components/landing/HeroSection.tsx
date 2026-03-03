@@ -85,6 +85,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               className="gradient-teal border-0 text-primary-foreground font-bold text-base px-8 py-6 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-0.5"
+              onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
             >
               {t("hero.cta")}
               <ChevronRight className="ml-1 h-5 w-5" />
@@ -93,6 +94,7 @@ const HeroSection = () => {
               size="lg"
               variant="outline"
               className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 font-semibold px-8 py-6 backdrop-blur-sm"
+              onClick={() => document.getElementById('platforms')?.scrollIntoView({ behavior: 'smooth' })}
             >
               {t("hero.demo")}
               <ArrowRight className="ml-1 h-5 w-5" />
