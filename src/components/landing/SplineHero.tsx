@@ -25,11 +25,20 @@ export default function SplineHero() {
             {t("hero.sub")}
           </p>
           <div className="flex gap-3">
-            <Button size="sm" className="gradient-teal border-0 text-primary-foreground font-semibold">
+            <Button 
+              size="sm" 
+              className="gradient-teal border-0 text-primary-foreground font-semibold"
+              onClick={() => document.getElementById('solutions')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               {t("hero.cta")}
               <ChevronRight className="ml-1 h-4 w-4" />
             </Button>
-            <Button size="sm" variant="outline" className="border-white/20 text-white hover:bg-white/10">
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="border-white/20 text-white hover:bg-white/10"
+              onClick={() => document.getElementById('platforms')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               {t("hero.demo")}
               <ArrowRight className="ml-1 h-4 w-4" />
             </Button>
