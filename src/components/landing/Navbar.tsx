@@ -4,6 +4,7 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import medicortexLogo from "@/assets/logo.svg";
 import { useTranslation } from "@/contexts/LanguageContext";
 import type { Language } from "@/i18n/translations";
+import { motion } from "framer-motion";
 
 const navLinkKeys = [
   { key: "nav.home", href: "#home" },
@@ -42,13 +43,16 @@ const Navbar = () => {
             alt="Medicortex Logo"
             className={`transition-all duration-300 ${scrolled ? "h-10 w-10" : "h-12 w-12"}`}
           />
-          <span
+          <motion.span
             className={`font-extrabold tracking-tight transition-all duration-300 ${
               scrolled ? "text-xl" : "text-2xl"
             } ${scrolled ? "text-foreground" : "text-secondary"}`}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             Medicortex
-          </span>
+          </motion.span>
         </a>
 
         {/* Desktop nav */}
