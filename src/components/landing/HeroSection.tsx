@@ -57,17 +57,12 @@ const HeroSection = () => {
           {/* Headline */}
           <motion.h1
             className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6 text-shadow"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
           >
-            <TextRoll className="text-white" duration={0.3} getEnterDelay={(i) => i * 0.05}>
-              {t("hero.headline1")}
-            </TextRoll>
-            <br />
-            <TextRoll className="gradient-text" duration={0.3} getEnterDelay={(i) => i * 0.05 + 0.5}>
-              {t("hero.headline2")}
-            </TextRoll>
+            <span className="text-white block mb-2">{t("hero.headline1")}</span>
+            <span className="gradient-text block">{t("hero.headline2")}</span>
           </motion.h1>
 
           {/* Subheadline */}
