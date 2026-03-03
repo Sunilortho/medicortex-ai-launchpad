@@ -21,13 +21,10 @@ const FooterCTA = () => {
   };
 
   return (
-    <section id="contact" className="py-24 gradient-teal relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <svg className="w-full h-full" viewBox="0 0 1200 400" fill="none">
-          <circle cx="100" cy="200" r="200" stroke="white" strokeWidth="0.5" />
-          <circle cx="1100" cy="100" r="150" stroke="white" strokeWidth="0.5" />
-        </svg>
-      </div>
+    <section id="contact" className="py-24 bg-card relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
@@ -38,15 +35,15 @@ const FooterCTA = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               {t("cta.title")}
             </h2>
-            <p className="text-primary-foreground/80 text-lg">{t("cta.sub")}</p>
+            <p className="text-muted-foreground text-lg">{t("cta.sub")}</p>
           </motion.div>
 
           <motion.form
             onSubmit={handleSubmit}
-            className="bg-card/10 backdrop-blur-md rounded-2xl p-8 border border-primary-foreground/20 max-w-2xl mx-auto"
+            className="bg-card/50 backdrop-blur-md rounded-2xl p-8 border border-border max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -57,12 +54,12 @@ const FooterCTA = () => {
                 placeholder={t("cta.name")}
                 required
                 maxLength={100}
-                className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus-visible:ring-primary-foreground/30"
+                className="bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-primary"
               />
               <Input
                 placeholder={t("cta.org")}
                 maxLength={100}
-                className="bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus-visible:ring-primary-foreground/30"
+                className="bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-primary"
               />
             </div>
             <Input
@@ -70,13 +67,13 @@ const FooterCTA = () => {
               placeholder={t("cta.email")}
               required
               maxLength={255}
-              className="mb-4 bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus-visible:ring-primary-foreground/30"
+              className="mb-4 bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-primary"
             />
             <Textarea
               placeholder={t("cta.message")}
               rows={4}
               maxLength={1000}
-              className="mb-4 bg-primary-foreground/10 border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus-visible:ring-primary-foreground/30"
+              className="mb-4 bg-background border-border text-foreground placeholder:text-muted-foreground focus-visible:ring-primary"
             />
 
             {/* DSGVO Consent */}
@@ -85,24 +82,24 @@ const FooterCTA = () => {
                 id="gdpr-consent"
                 checked={consent}
                 onCheckedChange={(checked) => setConsent(checked === true)}
-                className="mt-0.5 border-primary-foreground/40 data-[state=checked]:bg-primary-foreground data-[state=checked]:text-primary"
+                className="mt-0.5 border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
                 required
               />
-              <Label htmlFor="gdpr-consent" className="text-sm text-primary-foreground/80 cursor-pointer leading-relaxed">
+              <Label htmlFor="gdpr-consent" className="text-sm text-muted-foreground cursor-pointer leading-relaxed">
                 {t("cta.consent")}
               </Label>
             </div>
 
             {/* EU badge */}
             <div className="flex items-center gap-2 mb-4 justify-center">
-              <Shield className="h-4 w-4 text-primary-foreground/60" />
-              <span className="text-xs text-primary-foreground/60">{t("footer.gdpr")}</span>
+              <Shield className="h-4 w-4 text-primary" />
+              <span className="text-xs text-muted-foreground">{t("footer.gdpr")}</span>
             </div>
 
             <Button
               type="submit"
               size="lg"
-              className="w-full bg-primary-foreground text-primary font-bold hover:bg-primary-foreground/90"
+              className="w-full gradient-teal text-primary-foreground font-bold hover:opacity-90 glow-sm"
               disabled={submitted || !consent}
             >
               {submitted ? t("cta.sent") : (

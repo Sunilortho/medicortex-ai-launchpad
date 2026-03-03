@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import medicortexLogo from "@/assets/logo.svg";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -16,9 +17,9 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-secondary text-secondary-foreground">
+    <footer className="bg-card border-t border-border">
       {/* CTA Section before footer */}
-      <div className="border-b border-white/10">
+      <div className="border-b border-border">
         <div className="container mx-auto px-4 py-16">
           <motion.div
             className="max-w-3xl mx-auto text-center"
@@ -26,15 +27,15 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-2xl sm:text-3xl font-bold mb-4">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4">
               {t("footer.ctaTitle")}
             </h3>
-            <p className="text-white/60 mb-8 max-w-xl mx-auto">
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
               {t("footer.ctaSub")}
             </p>
             <Button 
               size="lg" 
-              className="gradient-teal border-0 text-primary-foreground font-semibold px-8"
+              className="gradient-teal border-0 text-primary-foreground font-semibold px-8 glow-sm hover:glow"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
               {t("footer.ctaButton")}
@@ -50,9 +51,11 @@ const Footer = () => {
           <div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
               <img src={medicortexLogo} alt="Medicortex" className="h-10 w-10" />
-              <span className="font-bold text-xl text-white">Medicortex</span>
+              <span className="font-bold text-xl text-foreground">
+                <span className="text-primary">Medi</span>cortex
+              </span>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed mb-4">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
               {t("footer.desc")}
             </p>
             <a 
@@ -66,13 +69,13 @@ const Footer = () => {
 
           {/* Nav links */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">{t("footer.links")}</h4>
+            <h4 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">{t("footer.links")}</h4>
             <nav className="space-y-2">
               {navKeys.map((link) => (
                 <a
                   key={link.key}
                   href={link.href}
-                  className="block text-sm text-white/50 hover:text-primary transition-colors"
+                  className="block text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   {t(link.key)}
                 </a>
@@ -82,12 +85,12 @@ const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">{t("footer.legal")}</h4>
+            <h4 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">{t("footer.legal")}</h4>
             <nav className="space-y-2">
-              <Link to="/datenschutz" className="block text-sm text-white/50 hover:text-primary transition-colors">
+              <Link to="/datenschutz" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                 {t("footer.privacy")}
               </Link>
-              <Link to="/impressum" className="block text-sm text-white/50 hover:text-primary transition-colors">
+              <Link to="/impressum" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
                 {t("footer.impressum")}
               </Link>
             </nav>
@@ -95,19 +98,19 @@ const Footer = () => {
 
           {/* Social */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">{t("footer.connect")}</h4>
+            <h4 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">{t("footer.connect")}</h4>
             <div className="flex gap-3">
               <a
                 href="#"
                 aria-label="LinkedIn"
-                className="h-10 w-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors text-white/50"
+                className="h-10 w-10 rounded-lg bg-muted flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors text-muted-foreground"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="#"
                 aria-label="YouTube"
-                className="h-10 w-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors text-white/50"
+                className="h-10 w-10 rounded-lg bg-muted flex items-center justify-center hover:bg-primary/20 hover:text-primary transition-colors text-muted-foreground"
               >
                 <Youtube className="h-5 w-5" />
               </a>
@@ -116,13 +119,13 @@ const Footer = () => {
         </div>
 
         {/* GDPR badge + copyright */}
-        <div className="border-t border-white/10 mt-10 pt-8">
+        <div className="border-t border-border mt-10 pt-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-primary" />
-              <span className="text-xs text-white/40 font-medium">{t("footer.gdpr")}</span>
+              <span className="text-xs text-muted-foreground font-medium">{t("footer.gdpr")}</span>
             </div>
-            <p className="text-xs text-white/30">
+            <p className="text-xs text-muted-foreground/60">
               {t("footer.copyright")}
             </p>
           </div>
@@ -131,7 +134,5 @@ const Footer = () => {
     </footer>
   );
 };
-
-import { motion } from "framer-motion";
 
 export default Footer;

@@ -34,8 +34,12 @@ const PlatformsSection = () => {
   ];
 
   return (
-    <section id="platforms" className="py-24 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="platforms" className="py-24 bg-background relative">
+      {/* Background glow */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +47,7 @@ const PlatformsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-primary/10 text-primary mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-primary/10 text-primary mb-4 glow-sm">
             {t("platforms.badge")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
@@ -54,36 +58,36 @@ const PlatformsSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {platforms.map((platform, i) => (
             <motion.div
               key={platform.name}
-              className="group bg-card rounded-2xl border border-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              className="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 hover:glow-sm transition-all duration-500"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
             >
               {/* Card image */}
-              <div className="relative h-44 overflow-hidden bg-secondary">
+              <div className="relative h-48 overflow-hidden bg-secondary">
                 <img
                   src={platform.image}
                   alt={platform.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-4 h-10 w-10 rounded-lg gradient-teal flex items-center justify-center">
-                  <platform.icon className="h-5 w-5 text-primary-foreground" />
+                <div className="absolute bottom-4 left-4 h-12 w-12 rounded-xl gradient-teal flex items-center justify-center glow-sm">
+                  <platform.icon className="h-6 w-6 text-primary-foreground" />
                 </div>
               </div>
 
               <div className="p-6">
-                <h3 className="text-xl font-bold text-card-foreground mb-3">{platform.name}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{platform.name}</h3>
                 <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{platform.description}</p>
                 <ul className="space-y-2 mb-6">
                   {platform.benefits.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-sm text-card-foreground/80">
+                    <li key={b} className="flex items-start gap-2 text-sm text-muted-foreground">
                       <span className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
                       {b}
                     </li>
@@ -91,11 +95,11 @@ const PlatformsSection = () => {
                 </ul>
                 <Button
                   variant="outline"
-                  className="w-full border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground transition-colors group/btn"
+                  className="w-full border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-colors group/btn"
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   {t("platforms.demo")}
-                  <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                 </Button>
               </div>
             </motion.div>

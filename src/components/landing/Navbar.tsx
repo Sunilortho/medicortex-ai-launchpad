@@ -29,48 +29,54 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "glass shadow-lg shadow-black/5 py-3"
+          ? "glass border-b border-primary/20 py-3"
           : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto flex flex-col items-center px-4">
         {/* Logo centered */}
         <a href="#home" className="flex items-center gap-3 mb-2">
-          <img
+          <motion.img
             src={medicortexLogo}
             alt="Medicortex Logo"
             className={`transition-all duration-300 ${scrolled ? "h-10 w-10" : "h-12 w-12"}`}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
           />
           <motion.span
             className={`font-extrabold tracking-tight transition-all duration-300 ${
               scrolled ? "text-xl" : "text-2xl"
-            } ${scrolled ? "text-foreground" : "text-secondary"}`}
+            } text-foreground`}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Medicortex
+            <span className="text-primary">Medi</span>cortex
           </motion.span>
         </a>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinkKeys.map((link) => (
-            <a
+          {navLinkKeys.map((link, i) => (
+            <motion.a
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                scrolled ? "text-muted-foreground" : "text-secondary/70"
+                scrolled ? "text-muted-foreground" : "text-foreground/80"
               }`}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 + i * 0.05 }}
             >
               {t(link.key)}
-            </a>
+            </motion.a>
           ))}
 
           {/* Language toggle */}
-          <div className="flex items-center rounded-full border border-border overflow-hidden text-xs font-semibold">
+          <div className="flex items-center rounded-full border border-primary/30 overflow-hidden text-xs font-semibold">
             <button
               onClick={() => toggleLang("de")}
               className={`px-3 py-1.5 transition-colors ${
@@ -78,7 +84,7 @@ const Navbar = () => {
                   ? "bg-primary text-primary-foreground"
                   : scrolled
                   ? "text-muted-foreground hover:bg-muted"
-                  : "text-secondary/70 hover:bg-secondary/10"
+                  : "text-foreground/70 hover:bg-white/10"
               }`}
               aria-label="Deutsch"
             >
@@ -91,7 +97,7 @@ const Navbar = () => {
                   ? "bg-primary text-primary-foreground"
                   : scrolled
                   ? "text-muted-foreground hover:bg-muted"
-                  : "text-secondary/70 hover:bg-secondary/10"
+                  : "text-foreground/70 hover:bg-white/10"
               }`}
               aria-label="English"
             >
@@ -99,14 +105,20 @@ const Navbar = () => {
             </button>
           </div>
 
-          <Button 
-            size="sm" 
-            className="gradient-teal border-0 text-primary-foreground font-semibold ml-2 group"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
           >
-            {t("nav.getStarted")}
-            <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
-          </Button>
+            <Button 
+              size="sm" 
+              className="gradient-teal border-0 text-primary-foreground font-semibold ml-2 group glow-sm hover:glow"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              {t("nav.getStarted")}
+              <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </motion.div>
         </nav>
 
         {/* Mobile toggle */}
@@ -116,16 +128,20 @@ const Navbar = () => {
           aria-label="Toggle menu"
         >
           {mobileOpen ? (
-            <X className={scrolled ? "text-foreground" : "text-secondary"} />
+            <X className="text-foreground" />
           ) : (
-            <Menu className={scrolled ? "text-foreground" : "text-secondary"} />
+            <Menu className="text-foreground" />
           )}
         </button>
       </div>
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden glass border-t border-border px-6 py-4 space-y-3">
+        <motion.div 
+          className="md:hidden glass border-t border-primary/20 px-6 py-4 space-y-3"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
           {navLinkKeys.map((link) => (
             <a
               key={link.href}
@@ -153,7 +169,7 @@ const Navbar = () => {
           </div>
           <Button 
             size="sm" 
-            className="gradient-teal border-0 text-primary-foreground font-semibold w-full"
+            className="gradient-teal border-0 text-primary-foreground font-semibold w-full glow-sm"
             onClick={() => {
               setMobileOpen(false);
               document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -161,7 +177,7 @@ const Navbar = () => {
           >
             {t("nav.getStarted")}
           </Button>
-        </div>
+        </motion.div>
       )}
     </header>
   );
