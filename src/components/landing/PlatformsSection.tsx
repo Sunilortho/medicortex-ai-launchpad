@@ -1,44 +1,32 @@
 import { motion } from "framer-motion";
 import { Brain, Activity, Workflow, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const platforms = [
-  {
-    icon: Brain,
-    name: "MediAssist AI",
-    description: "Intelligent clinical decision support that empowers healthcare providers with real-time AI insights.",
-    benefits: [
-      "Real-time diagnostic assistance",
-      "Patient risk stratification",
-      "Evidence-based recommendations",
-      "EHR integration ready",
-    ],
-  },
-  {
-    icon: Activity,
-    name: "StaffIQ",
-    description: "AI-powered workforce intelligence that optimizes staffing across healthcare organizations.",
-    benefits: [
-      "Predictive demand forecasting",
-      "Smart candidate matching",
-      "Automated shift optimization",
-      "Cost reduction analytics",
-    ],
-  },
-  {
-    icon: Workflow,
-    name: "ClinicFlow AI",
-    description: "End-to-end clinic workflow automation that eliminates bottlenecks and improves patient experience.",
-    benefits: [
-      "Automated scheduling",
-      "Digital intake & records",
-      "Billing optimization",
-      "Patient journey tracking",
-    ],
-  },
-];
+import { useTranslation } from "@/contexts/LanguageContext";
 
 const PlatformsSection = () => {
+  const { t } = useTranslation();
+
+  const platforms = [
+    {
+      icon: Brain,
+      name: t("platform1.name"),
+      description: t("platform1.desc"),
+      benefits: [t("platform1.b1"), t("platform1.b2"), t("platform1.b3"), t("platform1.b4")],
+    },
+    {
+      icon: Activity,
+      name: t("platform2.name"),
+      description: t("platform2.desc"),
+      benefits: [t("platform2.b1"), t("platform2.b2"), t("platform2.b3"), t("platform2.b4")],
+    },
+    {
+      icon: Workflow,
+      name: t("platform3.name"),
+      description: t("platform3.desc"),
+      benefits: [t("platform3.b1"), t("platform3.b2"), t("platform3.b3"), t("platform3.b4")],
+    },
+  ];
+
   return (
     <section id="platforms" className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -50,13 +38,13 @@ const PlatformsSection = () => {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-primary/10 text-primary mb-4">
-            Our Platforms
+            {t("platforms.badge")}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Our 3 AI <span className="gradient-text">Game-Changers</span>
+            {t("platforms.title1")} <span className="gradient-text">{t("platforms.title2")}</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Purpose-built AI platforms delivering measurable results across the healthcare ecosystem.
+            {t("platforms.sub")}
           </p>
         </motion.div>
 
@@ -74,9 +62,7 @@ const PlatformsSection = () => {
                 <platform.icon className="h-7 w-7 text-primary-foreground" />
               </div>
               <h3 className="text-xl font-bold text-card-foreground mb-3">{platform.name}</h3>
-              <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
-                {platform.description}
-              </p>
+              <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{platform.description}</p>
               <ul className="space-y-2 mb-6">
                 {platform.benefits.map((b) => (
                   <li key={b} className="flex items-start gap-2 text-sm text-card-foreground/80">
@@ -89,7 +75,7 @@ const PlatformsSection = () => {
                 variant="outline"
                 className="w-full border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground transition-colors group/btn"
               >
-                Request Demo
+                {t("platforms.demo")}
                 <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
