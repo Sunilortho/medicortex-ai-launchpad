@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronRight, Quote } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/contexts/LanguageContext";
+import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
   const { t } = useTranslation();
@@ -24,18 +25,18 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-secondary neural-bg"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Abstract pattern overlay */}
-      <div className="absolute inset-0 opacity-10">
-        <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none">
-          <circle cx="200" cy="400" r="300" stroke="hsl(var(--teal))" strokeWidth="0.5" opacity="0.3" />
-          <circle cx="1000" cy="200" r="200" stroke="hsl(var(--blue-end))" strokeWidth="0.5" opacity="0.3" />
-          <circle cx="600" cy="600" r="250" stroke="hsl(var(--teal))" strokeWidth="0.5" opacity="0.2" />
-          <line x1="100" y1="100" x2="400" y2="300" stroke="hsl(var(--teal))" strokeWidth="0.3" opacity="0.2" />
-          <line x1="800" y1="150" x2="1100" y2="400" stroke="hsl(var(--blue-end))" strokeWidth="0.3" opacity="0.2" />
-          <line x1="300" y1="500" x2="700" y2="700" stroke="hsl(var(--teal))" strokeWidth="0.3" opacity="0.15" />
-        </svg>
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <img
+          src={heroBg}
+          alt=""
+          className="w-full h-full object-cover"
+          loading="eager"
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 bg-secondary/80" />
       </div>
 
       <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
