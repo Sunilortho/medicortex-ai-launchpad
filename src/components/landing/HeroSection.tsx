@@ -36,7 +36,7 @@ const HeroSection = () => {
           loading="eager"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/70 to-secondary/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/95 via-secondary/85 to-secondary/95" />
         <div className="absolute inset-0 gradient-mesh" />
       </div>
 
@@ -55,7 +55,7 @@ const HeroSection = () => {
 
           {/* Headline */}
           <motion.h1
-            className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6"
+            className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6 text-shadow"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
@@ -67,7 +67,7 @@ const HeroSection = () => {
 
           {/* Subheadline */}
           <motion.p
-            className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}

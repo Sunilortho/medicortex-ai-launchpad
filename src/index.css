@@ -139,6 +139,14 @@
     animation: float 6s ease-in-out infinite;
   }
 
+  .text-shadow {
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 30px rgba(0,0,0,0.6);
+  }
+
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
