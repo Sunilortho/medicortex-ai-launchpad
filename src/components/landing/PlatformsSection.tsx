@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { Brain, Activity, Workflow, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/contexts/LanguageContext";
+import platformMediassist from "@/assets/platform-mediassist.jpg";
+import platformStaffiq from "@/assets/platform-staffiq.jpg";
+import platformClinicflow from "@/assets/platform-clinicflow.jpg";
 
 const PlatformsSection = () => {
   const { t } = useTranslation();
@@ -9,18 +12,21 @@ const PlatformsSection = () => {
   const platforms = [
     {
       icon: Brain,
+      image: platformMediassist,
       name: t("platform1.name"),
       description: t("platform1.desc"),
       benefits: [t("platform1.b1"), t("platform1.b2"), t("platform1.b3"), t("platform1.b4")],
     },
     {
       icon: Activity,
+      image: platformStaffiq,
       name: t("platform2.name"),
       description: t("platform2.desc"),
       benefits: [t("platform2.b1"), t("platform2.b2"), t("platform2.b3"), t("platform2.b4")],
     },
     {
       icon: Workflow,
+      image: platformClinicflow,
       name: t("platform3.name"),
       description: t("platform3.desc"),
       benefits: [t("platform3.b1"), t("platform3.b2"), t("platform3.b3"), t("platform3.b4")],
@@ -52,32 +58,45 @@ const PlatformsSection = () => {
           {platforms.map((platform, i) => (
             <motion.div
               key={platform.name}
-              className="group bg-card rounded-2xl border border-border p-8 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              className="group bg-card rounded-2xl border border-border overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
             >
-              <div className="h-14 w-14 rounded-xl gradient-teal flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <platform.icon className="h-7 w-7 text-primary-foreground" />
+              {/* Card image */}
+              <div className="relative h-44 overflow-hidden bg-secondary">
+                <img
+                  src={platform.image}
+                  alt={platform.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-4 h-10 w-10 rounded-lg gradient-teal flex items-center justify-center">
+                  <platform.icon className="h-5 w-5 text-primary-foreground" />
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-card-foreground mb-3">{platform.name}</h3>
-              <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{platform.description}</p>
-              <ul className="space-y-2 mb-6">
-                {platform.benefits.map((b) => (
-                  <li key={b} className="flex items-start gap-2 text-sm text-card-foreground/80">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
-                    {b}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                variant="outline"
-                className="w-full border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground transition-colors group/btn"
-              >
-                {t("platforms.demo")}
-                <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-              </Button>
+
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-card-foreground mb-3">{platform.name}</h3>
+                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{platform.description}</p>
+                <ul className="space-y-2 mb-6">
+                  {platform.benefits.map((b) => (
+                    <li key={b} className="flex items-start gap-2 text-sm text-card-foreground/80">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  variant="outline"
+                  className="w-full border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground transition-colors group/btn"
+                >
+                  {t("platforms.demo")}
+                  <ArrowRight className="ml-1 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                </Button>
+              </div>
             </motion.div>
           ))}
         </div>
