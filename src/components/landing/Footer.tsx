@@ -1,11 +1,23 @@
-import { Linkedin, Youtube } from "lucide-react";
+import { Linkedin, Youtube, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 import medicortexLogo from "@/assets/medicortex-logo.png";
+import { useTranslation } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const navKeys = [
+    { key: "nav.home", href: "#home" },
+    { key: "nav.solutions", href: "#solutions" },
+    { key: "nav.platforms", href: "#platforms" },
+    { key: "nav.about", href: "#about" },
+    { key: "nav.contact", href: "#contact" },
+  ];
+
   return (
     <footer className="bg-secondary py-16 border-t border-secondary-foreground/10">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -13,29 +25,42 @@ const Footer = () => {
               <span className="font-bold text-lg text-secondary-foreground">Medicortex</span>
             </div>
             <p className="text-secondary-foreground/50 text-sm leading-relaxed">
-              Berlin-based AI Healthcare Solutions. Transforming hospitals, clinics, and staffing agencies worldwide with proven AI platforms.
+              {t("footer.desc")}
             </p>
           </div>
 
           {/* Nav links */}
           <div>
-            <h4 className="font-semibold text-secondary-foreground mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
+            <h4 className="font-semibold text-secondary-foreground mb-4 text-sm uppercase tracking-wider">{t("footer.links")}</h4>
             <nav className="space-y-2">
-              {["Home", "Solutions", "Platforms", "About", "Contact"].map((link) => (
+              {navKeys.map((link) => (
                 <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
+                  key={link.key}
+                  href={link.href}
                   className="block text-sm text-secondary-foreground/50 hover:text-primary transition-colors"
                 >
-                  {link}
+                  {t(link.key)}
                 </a>
               ))}
             </nav>
           </div>
 
+          {/* Legal */}
+          <div>
+            <h4 className="font-semibold text-secondary-foreground mb-4 text-sm uppercase tracking-wider">{t("footer.legal")}</h4>
+            <nav className="space-y-2">
+              <Link to="/datenschutz" className="block text-sm text-secondary-foreground/50 hover:text-primary transition-colors">
+                {t("footer.privacy")}
+              </Link>
+              <Link to="/impressum" className="block text-sm text-secondary-foreground/50 hover:text-primary transition-colors">
+                {t("footer.impressum")}
+              </Link>
+            </nav>
+          </div>
+
           {/* Social */}
           <div>
-            <h4 className="font-semibold text-secondary-foreground mb-4 text-sm uppercase tracking-wider">Connect</h4>
+            <h4 className="font-semibold text-secondary-foreground mb-4 text-sm uppercase tracking-wider">{t("footer.connect")}</h4>
             <div className="flex gap-3">
               <a
                 href="#"
@@ -55,10 +80,17 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-secondary-foreground/10 pt-8 text-center">
-          <p className="text-xs text-secondary-foreground/40">
-            © 2026 Medicortex. All rights reserved. | Berlin-based AI Healthcare Solutions
-          </p>
+        {/* GDPR badge + copyright */}
+        <div className="border-t border-secondary-foreground/10 pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <Shield className="h-4 w-4 text-primary" />
+              <span className="text-xs text-secondary-foreground/50 font-medium">{t("footer.gdpr")}</span>
+            </div>
+            <p className="text-xs text-secondary-foreground/40">
+              {t("footer.copyright")}
+            </p>
+          </div>
         </div>
       </div>
     </footer>

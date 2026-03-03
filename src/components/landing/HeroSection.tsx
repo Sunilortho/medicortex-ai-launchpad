@@ -2,34 +2,24 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronRight, Quote } from "lucide-react";
 import { useState, useEffect } from "react";
-
-const testimonials = [
-  {
-    quote: "Medicortex's AI platforms have completely transformed how we manage patient flow. Results exceeded all expectations.",
-    role: "Healthcare Director",
-    org: "Regional Hospital Network, US",
-  },
-  {
-    quote: "We reduced staffing costs by 35% while improving coverage quality. The AI matching is remarkably accurate.",
-    role: "Operations Manager",
-    org: "Medical Staffing Agency, UK",
-  },
-  {
-    quote: "Implementation was seamless. Within weeks, our clinic workflow efficiency improved dramatically.",
-    role: "Chief Medical Officer",
-    org: "Multi-Specialty Clinic, Germany",
-  },
-];
+import { useTranslation } from "@/contexts/LanguageContext";
 
 const HeroSection = () => {
+  const { t } = useTranslation();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const testimonials = [
+    { quote: t("hero.testimonial1.quote"), role: t("hero.testimonial1.role"), org: t("hero.testimonial1.org") },
+    { quote: t("hero.testimonial2.quote"), role: t("hero.testimonial2.role"), org: t("hero.testimonial2.org") },
+    { quote: t("hero.testimonial3.quote"), role: t("hero.testimonial3.role"), org: t("hero.testimonial3.org") },
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
 
   return (
     <section
@@ -50,13 +40,9 @@ const HeroSection = () => {
 
       <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-primary/10 text-primary mb-6">
-              AI-Powered Healthcare Solutions
+              {t("hero.badge")}
             </span>
           </motion.div>
 
@@ -66,9 +52,9 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
           >
-            <span className="gradient-text">Transforming Healthcare</span>
+            <span className="gradient-text">{t("hero.headline1")}</span>
             <br />
-            <span className="text-secondary-foreground">with AI</span>
+            <span className="text-secondary-foreground">{t("hero.headline2")}</span>
           </motion.h1>
 
           <motion.p
@@ -77,8 +63,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            3 Proven AI Platforms Delivering Game-Changing Results for Hospitals,
-            Clinics &amp; Agencies Worldwide
+            {t("hero.sub")}
           </motion.p>
 
           <motion.div
@@ -91,7 +76,7 @@ const HeroSection = () => {
               size="lg"
               className="gradient-teal border-0 text-primary-foreground font-bold text-base px-8 py-6 shadow-lg hover:shadow-xl transition-shadow"
             >
-              Explore Our AI Solutions
+              {t("hero.cta")}
               <ChevronRight className="ml-1 h-5 w-5" />
             </Button>
             <Button
@@ -99,37 +84,29 @@ const HeroSection = () => {
               variant="outline"
               className="border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/5 font-semibold px-8 py-6"
             >
-              Watch Demo
+              {t("hero.demo")}
             </Button>
           </motion.div>
 
           {/* Testimonial Carousel */}
-          <motion.div
-            className="max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-          >
+          <motion.div className="max-w-2xl mx-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.6 }}>
             <div className="bg-secondary-foreground/5 backdrop-blur-sm rounded-2xl p-6 border border-secondary-foreground/10">
               <Quote className="h-5 w-5 text-primary mb-3 mx-auto" />
               <p className="text-secondary-foreground/80 italic text-sm sm:text-base mb-4 min-h-[48px]">
                 "{testimonials[currentTestimonial].quote}"
               </p>
               <p className="text-xs text-secondary-foreground/50 font-semibold">
-                — {testimonials[currentTestimonial].role},{" "}
-                {testimonials[currentTestimonial].org}
+                — {testimonials[currentTestimonial].role}, {testimonials[currentTestimonial].org}
               </p>
               <div className="flex justify-center gap-2 mt-4">
                 {testimonials.map((_, i) => (
                   <button
                     key={i}
                     className={`h-1.5 rounded-full transition-all ${
-                      i === currentTestimonial
-                        ? "w-6 bg-primary"
-                        : "w-1.5 bg-secondary-foreground/20"
+                      i === currentTestimonial ? "w-6 bg-primary" : "w-1.5 bg-secondary-foreground/20"
                     }`}
                     onClick={() => setCurrentTestimonial(i)}
-                    aria-label={`View testimonial ${i + 1}`}
+                    aria-label={`Testimonial ${i + 1}`}
                   />
                 ))}
               </div>

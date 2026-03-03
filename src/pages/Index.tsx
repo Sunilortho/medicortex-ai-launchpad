@@ -5,6 +5,7 @@ import SolutionsSection from "@/components/landing/SolutionsSection";
 import SocialProofSection from "@/components/landing/SocialProofSection";
 import FooterCTA from "@/components/landing/FooterCTA";
 import Footer from "@/components/landing/Footer";
+import CookieConsent from "@/components/landing/CookieConsent";
 
 const Index = () => {
   return (
@@ -16,6 +17,7 @@ const Index = () => {
       <SocialProofSection />
       <FooterCTA />
       <Footer />
+      <CookieConsent />
     </div>
   );
 };

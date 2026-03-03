@@ -2,24 +2,29 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import medicortexLogo from "@/assets/medicortex-logo.png";
+import { useTranslation } from "@/contexts/LanguageContext";
+import type { Language } from "@/i18n/translations";
 
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Platforms", href: "#platforms" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+const navLinkKeys = [
+  { key: "nav.home", href: "#home" },
+  { key: "nav.solutions", href: "#solutions" },
+  { key: "nav.platforms", href: "#platforms" },
+  { key: "nav.about", href: "#about" },
+  { key: "nav.contact", href: "#contact" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { t, language, setLanguage } = useTranslation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const toggleLang = (lang: Language) => setLanguage(lang);
 
   return (
     <header
@@ -48,7 +53,7 @@ const Navbar = () => {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
+          {navLinkKeys.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -56,11 +61,42 @@ const Navbar = () => {
                 scrolled ? "text-muted-foreground" : "text-primary-foreground/80"
               }`}
             >
-              {link.label}
+              {t(link.key)}
             </a>
           ))}
+
+          {/* Language toggle */}
+          <div className="flex items-center rounded-full border border-primary/30 overflow-hidden text-xs font-semibold">
+            <button
+              onClick={() => toggleLang("de")}
+              className={`px-3 py-1.5 transition-colors ${
+                language === "de"
+                  ? "bg-primary text-primary-foreground"
+                  : scrolled
+                  ? "text-muted-foreground hover:bg-muted"
+                  : "text-primary-foreground/70 hover:bg-primary-foreground/10"
+              }`}
+              aria-label="Deutsch"
+            >
+              DE
+            </button>
+            <button
+              onClick={() => toggleLang("en")}
+              className={`px-3 py-1.5 transition-colors ${
+                language === "en"
+                  ? "bg-primary text-primary-foreground"
+                  : scrolled
+                  ? "text-muted-foreground hover:bg-muted"
+                  : "text-primary-foreground/70 hover:bg-primary-foreground/10"
+              }`}
+              aria-label="English"
+            >
+              EN
+            </button>
+          </div>
+
           <Button size="sm" className="gradient-teal border-0 text-primary-foreground font-semibold ml-2">
-            Get Started
+            {t("nav.getStarted")}
           </Button>
         </nav>
 
@@ -81,18 +117,33 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-card/95 backdrop-blur-md border-t border-border px-6 py-4 space-y-3">
-          {navLinks.map((link) => (
+          {navLinkKeys.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className="block text-sm font-medium text-foreground hover:text-primary"
               onClick={() => setMobileOpen(false)}
             >
-              {link.label}
+              {t(link.key)}
             </a>
           ))}
+          {/* Mobile language toggle */}
+          <div className="flex items-center gap-2 py-2">
+            <button
+              onClick={() => toggleLang("de")}
+              className={`px-3 py-1 rounded text-xs font-semibold ${language === "de" ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}
+            >
+              DE
+            </button>
+            <button
+              onClick={() => toggleLang("en")}
+              className={`px-3 py-1 rounded text-xs font-semibold ${language === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}
+            >
+              EN
+            </button>
+          </div>
           <Button size="sm" className="gradient-teal border-0 text-primary-foreground font-semibold w-full">
-            Get Started
+            {t("nav.getStarted")}
           </Button>
         </div>
       )}
