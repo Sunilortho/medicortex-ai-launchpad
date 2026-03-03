@@ -140,6 +140,15 @@
     animation: float 6s ease-in-out infinite;
   }
 
+  @keyframes spotlight {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+
+  .animate-spotlight {
+    animation: spotlight 2s ease-in-out infinite;
+  }
+
   .text-shadow {
     text-shadow: 0 2px 20px rgba(0,0,0,0.5);
   }
