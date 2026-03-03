@@ -4,6 +4,7 @@ import { ChevronRight, ArrowRight, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
+import { TextRoll } from "@/components/ui/text-roll";
 
 const HeroSection = () => {
   const { t } = useTranslation();
@@ -56,13 +57,17 @@ const HeroSection = () => {
           {/* Headline */}
           <motion.h1
             className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6 text-shadow"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
           >
-            <span className="text-white">{t("hero.headline1")}</span>
+            <TextRoll className="text-white" duration={0.3} getEnterDelay={(i) => i * 0.05}>
+              {t("hero.headline1")}
+            </TextRoll>
             <br />
-            <span className="gradient-text">{t("hero.headline2")}</span>
+            <TextRoll className="gradient-text" duration={0.3} getEnterDelay={(i) => i * 0.05 + 0.5}>
+              {t("hero.headline2")}
+            </TextRoll>
           </motion.h1>
 
           {/* Subheadline */}
