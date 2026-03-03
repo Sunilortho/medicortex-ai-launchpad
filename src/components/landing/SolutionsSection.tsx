@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Building2, Stethoscope, Users, Puzzle } from "lucide-react";
+import { Building2, Stethoscope, Users, Puzzle, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "@/contexts/LanguageContext";
 import solHospital from "@/assets/sol-hospital.jpg";
 import solClinic from "@/assets/sol-clinic.jpg";
@@ -41,8 +41,9 @@ const SolutionsSection = () => {
   ];
 
   return (
-    <section id="solutions" className="py-24 bg-secondary neural-bg">
+    <section id="solutions" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4">
+        {/* Section header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -53,47 +54,51 @@ const SolutionsSection = () => {
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-primary/10 text-primary mb-4">
             {t("solutions.badge")}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-secondary-foreground mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             {t("solutions.title1")} <span className="gradient-text">{t("solutions.title2")}</span>
           </h2>
-          <p className="text-secondary-foreground/60 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             {t("solutions.sub")}
           </p>
         </motion.div>
 
-        <div className="max-w-5xl mx-auto space-y-20">
+        {/* Solutions grid */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           {solutions.map((solution, i) => (
             <motion.div
               key={solution.title}
-              className={`flex flex-col ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-10 items-center`}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              {/* Image side */}
-              <div className="flex-1 flex justify-center">
-                <div className="relative rounded-2xl overflow-hidden shadow-xl">
-                  <img
-                    src={solution.image}
-                    alt={solution.title}
-                    className="w-64 h-64 object-cover"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 h-12 w-12 rounded-xl bg-primary/90 flex items-center justify-center">
-                    <solution.icon className="h-6 w-6 text-primary-foreground" />
-                  </div>
+              {/* Image */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={solution.image}
+                  alt={solution.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 h-12 w-12 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/25">
+                  <solution.icon className="h-6 w-6 text-primary-foreground" />
                 </div>
               </div>
+
               {/* Content */}
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-secondary-foreground mb-3">{solution.title}</h3>
-                <p className="text-secondary-foreground/60 leading-relaxed mb-5">{solution.description}</p>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {solution.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed mb-4 text-sm">
+                  {solution.description}
+                </p>
                 <ul className="space-y-2">
                   {solution.benefits.map((b) => (
-                    <li key={b} className="flex items-center gap-3 text-sm text-secondary-foreground/80">
-                      <span className="h-2 w-2 rounded-full gradient-teal shrink-0" />
+                    <li key={b} className="flex items-center gap-2 text-sm text-foreground/80">
+                      <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
                       {b}
                     </li>
                   ))}

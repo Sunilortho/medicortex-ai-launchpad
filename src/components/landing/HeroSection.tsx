@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ChevronRight, Quote } from "lucide-react";
+import { ChevronRight, ArrowRight, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTranslation } from "@/contexts/LanguageContext";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -27,7 +27,7 @@ const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background image */}
+      {/* Background with overlay */}
       <div className="absolute inset-0">
         <img
           src={heroBg}
@@ -36,30 +36,38 @@ const HeroSection = () => {
           loading="eager"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-secondary/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary/90 via-secondary/70 to-secondary/90" />
+        <div className="absolute inset-0 gradient-mesh" />
       </div>
 
       <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-primary/10 text-primary mb-6">
-              {t("hero.badge")}
-            </span>
+          {/* Badge */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-8"
+          >
+            <Sparkles className="h-4 w-4" />
+            {t("hero.badge")}
           </motion.div>
 
+          {/* Headline */}
           <motion.h1
             className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
           >
-            <span className="gradient-text">{t("hero.headline1")}</span>
+            <span className="text-white">{t("hero.headline1")}</span>
             <br />
-            <span className="text-secondary-foreground">{t("hero.headline2")}</span>
+            <span className="gradient-text">{t("hero.headline2")}</span>
           </motion.h1>
 
+          {/* Subheadline */}
           <motion.p
-            className="text-lg sm:text-xl text-secondary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -67,6 +75,7 @@ const HeroSection = () => {
             {t("hero.sub")}
           </motion.p>
 
+          {/* CTAs */}
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -75,7 +84,7 @@ const HeroSection = () => {
           >
             <Button
               size="lg"
-              className="gradient-teal border-0 text-primary-foreground font-bold text-base px-8 py-6 shadow-lg hover:shadow-xl transition-shadow"
+              className="gradient-teal border-0 text-primary-foreground font-bold text-base px-8 py-6 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all hover:-translate-y-0.5"
             >
               {t("hero.cta")}
               <ChevronRight className="ml-1 h-5 w-5" />
@@ -83,20 +92,34 @@ const HeroSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/5 font-semibold px-8 py-6"
+              className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 font-semibold px-8 py-6 backdrop-blur-sm"
             >
               {t("hero.demo")}
+              <ArrowRight className="ml-1 h-5 w-5" />
             </Button>
           </motion.div>
 
           {/* Testimonial Carousel */}
-          <motion.div className="max-w-2xl mx-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.6 }}>
-            <div className="bg-secondary-foreground/5 backdrop-blur-sm rounded-2xl p-6 border border-secondary-foreground/10">
-              <Quote className="h-5 w-5 text-primary mb-3 mx-auto" />
-              <p className="text-secondary-foreground/80 italic text-sm sm:text-base mb-4 min-h-[48px]">
+          <motion.div 
+            className="max-w-2xl mx-auto" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
+              <div className="flex justify-center mb-3">
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="h-4 w-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+              <p className="text-white/80 italic text-sm sm:text-base mb-4 min-h-[48px]">
                 "{testimonials[currentTestimonial].quote}"
               </p>
-              <p className="text-xs text-secondary-foreground/50 font-semibold">
+              <p className="text-xs text-white/40 font-semibold">
                 — {testimonials[currentTestimonial].role}, {testimonials[currentTestimonial].org}
               </p>
               <div className="flex justify-center gap-2 mt-4">
@@ -104,7 +127,7 @@ const HeroSection = () => {
                   <button
                     key={i}
                     className={`h-1.5 rounded-full transition-all ${
-                      i === currentTestimonial ? "w-6 bg-primary" : "w-1.5 bg-secondary-foreground/20"
+                      i === currentTestimonial ? "w-8 bg-primary" : "w-1.5 bg-white/20"
                     }`}
                     onClick={() => setCurrentTestimonial(i)}
                     aria-label={`Testimonial ${i + 1}`}
@@ -115,6 +138,22 @@ const HeroSection = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
+        <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2">
+          <motion.div 
+            className="w-1.5 h-3 bg-primary rounded-full"
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+        </div>
+      </motion.div>
     </section>
   );
 };

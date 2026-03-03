@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="56" fill="#0A2540"/>
+  
+  <!-- Medical cross / Tech symbol -->
+  <path d="M52 30h16v24h24v16h-24v24h-16v-24H28v-16h24V30z" fill="#00D4AA"/>
+  
+  <!-- Inner accent -->
+  <circle cx="60" cy="60" r="12" fill="#0A2540"/>
+  <path d="M56 54h8v12h-8z" fill="#00D4AA"/>
+  
+  <!-- Subtle glow effect -->
+  <circle cx="60" cy="60" r="50" stroke="#00D4AA" stroke-width="2" stroke-opacity="0.3" fill="none"/>
+</svg>

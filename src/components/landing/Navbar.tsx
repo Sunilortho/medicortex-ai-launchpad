@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import medicortexLogo from "@/assets/medicortex-logo.png";
+import { Menu, X, ChevronRight } from "lucide-react";
+import medicortexLogo from "@/assets/logo.svg";
 import { useTranslation } from "@/contexts/LanguageContext";
 import type { Language } from "@/i18n/translations";
 
@@ -30,8 +30,8 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-card/95 backdrop-blur-md shadow-lg py-3"
-          : "bg-transparent py-6"
+          ? "glass shadow-lg shadow-black/5 py-3"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto flex flex-col items-center px-4">
@@ -40,12 +40,12 @@ const Navbar = () => {
           <img
             src={medicortexLogo}
             alt="Medicortex Logo"
-            className={`transition-all duration-300 ${scrolled ? "h-10 w-10" : "h-14 w-14"} rounded-lg`}
+            className={`transition-all duration-300 ${scrolled ? "h-10 w-10" : "h-12 w-12"}`}
           />
           <span
             className={`font-extrabold tracking-tight transition-all duration-300 ${
               scrolled ? "text-xl" : "text-2xl"
-            } ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
+            } ${scrolled ? "text-foreground" : "text-secondary"}`}
           >
             Medicortex
           </span>
@@ -58,7 +58,7 @@ const Navbar = () => {
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-primary ${
-                scrolled ? "text-muted-foreground" : "text-primary-foreground/80"
+                scrolled ? "text-muted-foreground" : "text-secondary/70"
               }`}
             >
               {t(link.key)}
@@ -66,7 +66,7 @@ const Navbar = () => {
           ))}
 
           {/* Language toggle */}
-          <div className="flex items-center rounded-full border border-primary/30 overflow-hidden text-xs font-semibold">
+          <div className="flex items-center rounded-full border border-border overflow-hidden text-xs font-semibold">
             <button
               onClick={() => toggleLang("de")}
               className={`px-3 py-1.5 transition-colors ${
@@ -74,7 +74,7 @@ const Navbar = () => {
                   ? "bg-primary text-primary-foreground"
                   : scrolled
                   ? "text-muted-foreground hover:bg-muted"
-                  : "text-primary-foreground/70 hover:bg-primary-foreground/10"
+                  : "text-secondary/70 hover:bg-secondary/10"
               }`}
               aria-label="Deutsch"
             >
@@ -87,7 +87,7 @@ const Navbar = () => {
                   ? "bg-primary text-primary-foreground"
                   : scrolled
                   ? "text-muted-foreground hover:bg-muted"
-                  : "text-primary-foreground/70 hover:bg-primary-foreground/10"
+                  : "text-secondary/70 hover:bg-secondary/10"
               }`}
               aria-label="English"
             >
@@ -95,28 +95,29 @@ const Navbar = () => {
             </button>
           </div>
 
-          <Button size="sm" className="gradient-teal border-0 text-primary-foreground font-semibold ml-2">
+          <Button size="sm" className="gradient-teal border-0 text-primary-foreground font-semibold ml-2 group">
             {t("nav.getStarted")}
+            <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
           </Button>
         </nav>
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden absolute right-4 top-6"
+          className="md:hidden absolute right-4 top-5"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
           {mobileOpen ? (
-            <X className={scrolled ? "text-foreground" : "text-primary-foreground"} />
+            <X className={scrolled ? "text-foreground" : "text-secondary"} />
           ) : (
-            <Menu className={scrolled ? "text-foreground" : "text-primary-foreground"} />
+            <Menu className={scrolled ? "text-foreground" : "text-secondary"} />
           )}
         </button>
       </div>
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-card/95 backdrop-blur-md border-t border-border px-6 py-4 space-y-3">
+        <div className="md:hidden glass border-t border-border px-6 py-4 space-y-3">
           {navLinkKeys.map((link) => (
             <a
               key={link.href}
